@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fafafa;
+  --foreground: #09090b;
+  --card: #ffffff;
+  --card-foreground: #09090b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --border: #e4e4e7;
+  --accent: #0ea5e9;
+  --accent-foreground: #f8fafc;
+  --ring: #0ea5e9;
+  --success: #16a34a;
+  --warning: #d97706;
+  --destructive: #dc2626;
+  --glow: rgba(14, 165, 233, 0.18);
+  --glass: rgba(255, 255, 255, 0.72);
+  --shadow-soft: 0 1px 2px rgba(9, 9, 11, 0.04), 0 8px 24px rgba(9, 9, 11, 0.06);
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: #111113;
+  --card-foreground: #fafafa;
+  --muted: #18181b;
+  --muted-foreground: #a1a1aa;
+  --border: #27272a;
+  --accent: #38bdf8;
+  --accent-foreground: #082f49;
+  --ring: #38bdf8;
+  --success: #22c55e;
+  --warning: #fbbf24;
+  --destructive: #f87171;
+  --glow: rgba(56, 189, 248, 0.2);
+  --glass: rgba(9, 9, 11, 0.72);
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-destructive: var(--destructive);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --shadow-soft: var(--shadow-soft);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 35%, transparent);
+  color: var(--foreground);
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.nav-scrolled {
+  border-bottom-width: 1px;
+  border-bottom-color: color-mix(in oklab, var(--border) 60%, transparent);
+}
+
+.gradient-mesh {
+  background:
+    radial-gradient(ellipse 120% 85% at 18% 0%, var(--glow), transparent 55%),
+    radial-gradient(ellipse 80% 55% at 90% 0%, color-mix(in oklab, var(--accent) 14%, transparent), transparent 50%),
+    radial-gradient(ellipse 50% 30% at 50% 100%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 60%);
+}
+
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Motion FOUC guard — content becomes visible via GSAP or motion-ready */
+html:not(.motion-ready) [data-reveal],
+html:not(.motion-ready) [data-hero],
+html:not(.motion-ready) [data-nav],
+html:not(.motion-ready) [data-project-card],
+html:not(.motion-ready) [data-timeline-card],
+html:not(.motion-ready) [data-timeline-marker],
+html:not(.motion-ready) [data-timeline-bullet],
+html:not(.motion-ready) [data-case],
+html:not(.motion-ready) [data-tech-card],
+html:not(.motion-ready) [data-form-field] {
+  opacity: 0;
+}
+
+html.motion-ready.prefers-reduced [data-reveal],
+html.motion-ready.prefers-reduced [data-hero],
+html.motion-ready.prefers-reduced [data-nav],
+html.motion-ready.prefers-reduced [data-project-card],
+html.motion-ready.prefers-reduced [data-timeline-card],
+html.motion-ready.prefers-reduced [data-timeline-marker],
+html.motion-ready.prefers-reduced [data-timeline-bullet],
+html.motion-ready.prefers-reduced [data-case],
+html.motion-ready.prefers-reduced [data-tech-card],
+html.motion-ready.prefers-reduced [data-form-field] {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not(.motion-ready) [data-reveal],
+  html:not(.motion-ready) [data-hero],
+  html:not(.motion-ready) [data-nav],
+  html:not(.motion-ready) [data-project-card],
+  html:not(.motion-ready) [data-timeline-card],
+  html:not(.motion-ready) [data-timeline-marker],
+  html:not(.motion-ready) [data-timeline-bullet],
+  html:not(.motion-ready) [data-case],
+  html:not(.motion-ready) [data-tech-card],
+  html:not(.motion-ready) [data-form-field] {
+    opacity: 1;
+  }
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.35rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (pointer: fine) {
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+.hero-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(48px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* Morphing organic profile frame (blob border) */
+.avatar-blob {
+  position: relative;
+  overflow: hidden;
+  border: 2.5px solid var(--foreground);
+  box-shadow: var(--shadow-soft);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: avatar-blob-morph 8s ease-in-out infinite;
+  will-change: border-radius;
+}
+
+@keyframes avatar-blob-morph {
+  0%,
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  50% {
+    border-radius: 50% 60% 30% 60% / 30% 40% 70% 50%;
+  }
+  75% {
+    border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-blob {
+    animation: none;
+    border-radius: 42% 58% 50% 50% / 48% 42% 58% 52%;
+  }
+}
+
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+.split-parent {
+  perspective: 800px;
+}
